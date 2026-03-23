@@ -1,15 +1,55 @@
-//TIP 코드를 <b>실행</b>하려면 <shortcut actionId="Run"/>을(를) 누르거나
-// 에디터 여백에 있는 <icon src="AllIcons.Actions.Execute"/> 아이콘을 클릭하세요.
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP 캐럿을 강조 표시된 텍스트에 놓고 <shortcut actionId="ShowIntentionActions"/>을(를) 누르면
-        // IntelliJ IDEA이(가) 수정을 제안하는 것을 확인할 수 있습니다.
-        System.out.print("Hello and welcome!");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("계산기 입니다. (=을 입력하면 결과 출력)");
+        double num = 0;
+        char symbol = '+';
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP <shortcut actionId="Debug"/>을(를) 눌러 코드 디버그를 시작하세요. 1개의 <icon src="AllIcons.Debugger.Db_set_breakpoint"/> 중단점을 설정해 드렸습니다
-            // 언제든 <shortcut actionId="ToggleLineBreakpoint"/>을(를) 눌러 중단점을 더 추가할 수 있습니다.
-            System.out.println("i = " + i);
+        Storage<Double> numStorage = new Storage<>(num);
+        Storage<Character> symbolStorage = new Storage<>(symbol);
+        int i = 1;
+        int j = 1;
+
+        while(true){
+            try{
+                System.out.print(i + "번째 숫자를 입력하세요: ");
+                double n = sc.nextDouble();
+                numStorage.setItem(n);
+                char s;
+                while(true){
+                    System.out.print(j + "번째 기호를 입력하세요: ");
+                    s = sc.next().charAt(0);
+                    if (Character.isDigit(s)){
+                        System.out.println("기호 자리에 숫자를 입력할 수 없습니다.");
+                    }else break;
+                }
+                symbolStorage.setItem(s);
+
+                i++;
+                j++;
+
+                if (s == '='){
+                    break;
+                }
+
+            }catch (InputMismatchException e){
+            System.out.print("올바른 타입을 입력해주세요.");
+            sc.nextLine();
+            }
         }
+
+        Calculator cal = new Calculator();
+        double res = cal.calculate(numStorage.getItem(0), numStorage.getItem(1), symbolStorage.getItem(0));
+        for (int k = 1; k < i; k++){
+            res = cal.calculate(res, numStorage.getItem(k+1), symbolStorage.getItem(i));
+        }
+
+        System.out.println("결과: " + res);
+        //System.out.println(numStorage.getItems());
+        //System.out.println(symbolStorage.getItems());
+
     }
 }
