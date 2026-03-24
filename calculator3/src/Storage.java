@@ -5,9 +5,9 @@ public class Storage<T>{
     private List<T> items = new ArrayList<>();
     private T item;
 
-    public Storage(T item) {
-        this.item = item;
-    }
+//    public Storage(T item) {
+//        this.item = item;
+//    }
 
     public void setItem(T item) {
         this.item = item;

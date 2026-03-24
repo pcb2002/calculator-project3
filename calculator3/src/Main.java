@@ -5,11 +5,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("계산기 입니다. (=을 입력하면 결과 출력)");
-        double num = 0;
-        char symbol = '+';
 
-        Storage<Double> numStorage = new Storage<>(num);
-        Storage<Character> symbolStorage = new Storage<>(symbol);
+        Storage<Object> storage = new Storage<>();
         int i = 1;
         int j = 1;
 
@@ -17,7 +14,7 @@ public class Main {
             try{
                 System.out.print(i + "번째 숫자를 입력하세요: ");
                 double n = sc.nextDouble();
-                numStorage.setItem(n);
+                storage.setItem(n);
                 char s;
                 while(true){
                     System.out.print(j + "번째 기호를 입력하세요: ");
@@ -26,7 +23,7 @@ public class Main {
                         System.out.println("기호 자리에 숫자를 입력할 수 없습니다.");
                     }else break;
                 }
-                symbolStorage.setItem(s);
+                storage.setItem(s);
 
                 i++;
                 j++;
@@ -42,9 +39,9 @@ public class Main {
         }
 
         Calculator cal = new Calculator();
-        double res = cal.calculate(numStorage.getItem(0), numStorage.getItem(1), symbolStorage.getItem(0));
+        double res = (double) storage.getItem(0);
         for (int k = 1; k < i; k++){
-            res = cal.calculate(res, numStorage.getItem(k+1), symbolStorage.getItem(i));
+            res = cal.calculate(res, (double) storage.getItem(k+1), (char) storage.getItem(k));
         }
 
         System.out.println("결과: " + res);
