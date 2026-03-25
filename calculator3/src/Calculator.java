@@ -3,16 +3,14 @@ import java.util.Scanner;
 public class Calculator {
     // 속성
     private Scanner sc;
-    private InputTask input;
-    private Storage<Object> storage;
-    private Storage<Double> results;
+    private InputTask inputTask;
+    private Storage<Double> resultStorage;
 
     // 생성자
-    public Calculator(Scanner sc, InputTask input, Storage<Object> storage, Storage<Double> results) {
+    public Calculator(Scanner sc, InputTask inputTask, Storage<Double> resultStorage) {
         this.sc = sc;
-        this.input = input;
-        this.storage = storage;
-        this.results = results;
+        this.inputTask = inputTask;
+        this.resultStorage = resultStorage;
     }
 
     // 기능
@@ -23,27 +21,27 @@ public class Calculator {
 
     public void run() {
         while(true){
-            input.task();
+            inputTask.run();
             // 배열 확인용 출력
-            storage.getStorage();
+            inputTask.printInputStorage();
 
-            double totalRes = input.getNumber(0);
+            double totalRes = inputTask.getNumber(0);
 
-            for (int k = 1; k < storage.getItems().size(); k+=2){
-                char symbol = input.getSymbol(k);
+            for (int k = 1; k < inputTask.getInputStorageSize(); k+=2){
+                char symbol = inputTask.getSymbol(k);
                 if (symbol == '=') {
                     break;
                 }
-                double nextNum = input.getNumber(k + 1);
+                double nextNum = inputTask.getNumber(k + 1);
                 totalRes = calculateTask(totalRes, nextNum, symbol);
             }
             // 결과 저장
-            results.setItem(totalRes);
+            resultStorage.saveItem(totalRes);
             System.out.println("결과: " + totalRes);
             // 저장 결과 출력
-            results.getStorage();
+            resultStorage.getStorage();
             // 스토리지 지우기
-            storage.clear();
+            inputTask.clearInputStorage();
 
             System.out.print("\n종료하시겠습니까? (eixt): ");
             String end = sc.next();

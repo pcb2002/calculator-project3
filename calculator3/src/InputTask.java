@@ -4,16 +4,16 @@ import java.util.Scanner;
 public class InputTask {
     // 속성
     private Scanner sc;
-    private Storage<Object> storage;
+    private Storage<Object> inputStorage;
 
     // 생성자
-    public InputTask(Scanner sc, Storage<Object> storage) {
+    public InputTask(Scanner sc, Storage<Object> inputStorage) {
         this.sc = sc;
-        this.storage = storage;
+        this.inputStorage = inputStorage;
     }
 
     // 기능
-    public void task() {
+    public void run() {
         int i = 1;
         int j = 1;
 
@@ -23,7 +23,7 @@ public class InputTask {
             try {
                 System.out.print(i + "번째 숫자를 입력하세요: ");
                 double n = sc.nextDouble();
-                storage.setItem(n);
+                inputStorage.saveItem(n);
                 char s;
                 while(true) {
                     System.out.print(j + "번째 기호를 입력하세요: ");
@@ -32,7 +32,7 @@ public class InputTask {
                         System.out.println("기호 자리에 숫자를 입력할 수 없습니다.");
                     }else break;
                 }
-                storage.setItem(s);
+                inputStorage.saveItem(s);
 
                 i++;
                 j++;
@@ -49,10 +49,24 @@ public class InputTask {
     }
 
     public double getNumber(int x) {
-        return (double) storage.getItem(x);
+        return (double) inputStorage.getItem(x);
     }
 
     public char getSymbol(int x) {
-        return (char) storage.getItem(x);
+        return (char) inputStorage.getItem(x);
+    }
+
+    public int getInputStorageSize() {
+        return inputStorage.getItems().size();
+    }
+
+    public void clearInputStorage(){
+        inputStorage.clear();
+    }
+
+    public void printInputStorage() {
+        for(Object st : inputStorage.getItems()) {
+            System.out.print(st + " ");
+        }
     }
 }

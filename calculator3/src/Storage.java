@@ -6,7 +6,7 @@ public class Storage<T>{
     private List<T> items = new ArrayList<>();
 
     // 기능
-    public void setItem(T item) {
+    public void saveItem(T item) {
         items.add(item);
     }
 
