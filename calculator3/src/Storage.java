@@ -22,7 +22,7 @@ public class Storage<T>{
         this.items.clear();
     }
 
-    public void getStorage() {
+    public void printStorage() {
         for(Object st : getItems()) {
             System.out.print(st + " ");
         }

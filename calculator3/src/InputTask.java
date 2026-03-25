@@ -13,7 +13,7 @@ public class InputTask {
     }
 
     // 기능
-    public void run() {
+    public void runInput() {
         int i = 1;
         int j = 1;
 
