@@ -1,9 +1,15 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
 
-        Calculator cal = new Calculator();
-        double res = cal.totalRes();
+        Scanner sc = new Scanner(System.in);
+        Storage<Object> storage = new Storage<>();
+        Storage<Double> results = new Storage<>();
+        InputTask input = new InputTask(sc, storage);
+        Calculator cal = new Calculator(sc, input, storage, results);
 
-        System.out.println("\n결과: " + res);
+        cal.run();
+
     }
 }

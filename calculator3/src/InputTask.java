@@ -1,18 +1,22 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class InputClass {
-    Scanner sc = new Scanner(System.in);
-    Storage<Object> storage = new Storage<>();
+public class InputTask {
+    // 속성
+    private Scanner sc;
+    private Storage<Object> storage;
 
-    private int i = 1;
-    private int j = 1;
-
-    public int getIJ() {
-        return i+j;
+    // 생성자
+    public InputTask(Scanner sc, Storage<Object> storage) {
+        this.sc = sc;
+        this.storage = storage;
     }
 
-    public void inputClass() {
+    // 기능
+    public void task() {
+        int i = 1;
+        int j = 1;
+
         System.out.println("계산기 입니다. (=을 입력하면 결과 출력)");
 
         while(true) {
@@ -43,17 +47,12 @@ public class InputClass {
             }
         }
     }
+
     public double getNumber(int x) {
         return (double) storage.getItem(x);
     }
 
     public char getSymbol(int x) {
         return (char) storage.getItem(x);
-    }
-
-    public void getStorage() {
-        for(Object st : storage.getItems()) {
-            System.out.print(st + " ");
-        }
     }
 }

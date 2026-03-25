@@ -2,15 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage<T>{
+    // 속성
     private List<T> items = new ArrayList<>();
-    private T item;
 
-//    public Storage(T item) {
-//        this.item = item;
-//    }
-
+    // 기능
     public void setItem(T item) {
-        this.item = item;
         items.add(item);
     }
 
@@ -20,5 +16,15 @@ public class Storage<T>{
 
     public List<T> getItems() {
         return items;
+    }
+
+    public void clear() {
+        this.items.clear();
+    }
+
+    public void getStorage() {
+        for(Object st : getItems()) {
+            System.out.print(st + " ");
+        }
     }
 }
